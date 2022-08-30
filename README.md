@@ -1,3 +1,5 @@
+![github actions](https://github.com/miketako3/http-warmup-sidecar/actions/workflows/actions.yml/badge.svg)
+
 # http-warmup-sidecar
 
 ## What is this?
