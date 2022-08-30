@@ -85,4 +85,4 @@ waitHealthy
 
 warmup
 
-touch /http-warmup/warmup-complete
+touch /http-warmup/warmup-completed
