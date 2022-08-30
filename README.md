@@ -28,8 +28,38 @@ all parameters are required.
 | `$8`   | http body for warmup         | `{"foo": "bar"}` |                  |
 | `$9`   | count of requests for warmup | `1000`           | `10`             |
 
-## Example
+## Example to run on shell
 
 ```shell
  docker container run -t http-warmup:latest localhost:3000 "" "" "" localhost:3000 "" "" "" 10
+```
+
+## Example of kubernetes manifest
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
+    spec:
+      containers:
+        - name: warmup
+          image: ghcr.io/miketako3/http-warmup-sidecar:latest
+          args: [
+            "localhost:8080",
+            "",
+            "",
+            "",
+            "localhost:8080",
+            "",
+            "",
+            "",
+            "10"
+          ]
+          readinessProbe:
+            exec:
+              command: [ "cat", "/http-warmup/warmup-completed" ]
+            initialDelaySeconds: 30
+            periodSeconds: 1
+            failureThreshold: 10
 ```
